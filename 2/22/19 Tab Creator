@@ -1,0 +1,167 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+	char g_or_b;
+
+	cout << "Tab Creator!\n"
+		 << "What instrument do you want to create tab for?\n"
+		 << "\nEnter B for 4 string Bass\n"
+		 << "\nEnter G for 6 string Guitar\n\n";
+	cin >> g_or_b; 
+
+	string g_estring;
+	string g_astring;
+	string g_dstring;
+	string g_gstring;
+	string bstring;
+	string highestring;
+
+	while (g_or_b == 'g' || g_or_b == 'G') { // set tuning for guitar
+	
+		char choice;
+
+		cout << "Enter Tuning for each guitar string from low to high\n"
+			<< "\nE ";
+		cin >> g_estring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\na ";
+		cin >> g_astring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\nd ";
+		cin >> g_dstring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\ng ";
+		cin >> g_gstring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\nb ";
+		cin >> bstring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\ne ";
+		cin >> highestring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+
+		cout << endl
+			<< "So the tuning you want is:" << '\n'
+			<< g_estring << '\n'
+			<< g_astring << '\n'
+			<< g_dstring << '\n'
+			<< g_gstring << '\n'
+			<< bstring << '\n'
+			<< highestring << "\n\n"
+			<< "Is this ok? y/n: ";
+		cin >> choice;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cin.clear();
+
+		while (choice != 'y' && choice != 'n' && choice != 'Y' && choice != 'N') {
+			cout << "That isnt a valid answer. Press Y to continue, Press N to redo tuning: ";
+			cin >> choice;
+			cin.ignore(numeric_limits <streamsize>::max(), '\n');
+			cin.clear();
+		}
+
+		if (tolower(choice == 'y')) {
+			break;
+		}
+		else if (tolower(choice == 'n')) {
+			continue;
+		}			 
+
+
+	}
+	
+	string b_estring;
+	string b_astring;
+	string b_dstring;
+	string b_gstring;
+
+	while (g_or_b == 'b' || g_or_b == 'B') { // set tuning for bass
+		char choice;
+
+		cout << "Enter Tuning for each bass string from low to high\n"
+			<< "\nE ";
+		cin >> b_estring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\na ";
+		cin >> b_astring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\nd ";
+		cin >> b_dstring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cout << "\ng ";
+		cin >> b_gstring;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		
+		cout << endl
+			<< "So the tuning you want is:" << '\n'
+			<< b_estring << '\n'
+			<< b_astring << '\n'
+			<< b_dstring << '\n'
+			<< b_gstring << "\n\n"
+			<< "Is this ok? y/n: ";
+		cin >> choice;
+		cin.ignore(numeric_limits <streamsize>::max(), '\n');
+		cin.clear();
+
+		while (choice != 'y' && choice != 'n' && choice != 'Y' && choice !='N') {
+			cout << "That isnt a valid answer. Press Y to continue, Press N to redo tuning: ";
+			cin >> choice;
+			cin.ignore(numeric_limits <streamsize>::max(), '\n');
+			cin.clear();
+		}
+
+		if (tolower(choice == 'y')) {
+			break;
+		}
+		else if (tolower(choice == 'n')) {
+			continue;
+		}
+
+
+	}
+	
+	if (g_or_b == 'b' || g_or_b == 'B') {
+		cout << left << setw(2) << b_gstring
+			 << right << setw(50) << "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << b_dstring 
+			 << right << setw(50) << "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << b_astring 
+			 << right << setw(50) << "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << b_estring
+			 << right << setw(50) << "|----------------------------------------------|" << '\n';
+	}
+
+	else if (g_or_b == 'g' || g_or_b == 'G') {
+		cout << "\n\n"
+			 << left << setw(2) << highestring 
+			 << right << setw(50)<< "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << bstring 
+			 << right << setw(50)<<   "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << g_gstring
+			 << right << setw(50) << "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << g_dstring 
+			 << right << setw(50) << "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << g_astring 
+			 << right << setw(50) << "|----------------------------------------------|" << '\n'
+			 << left << setw(2) << g_estring 
+			 << right << setw(50) << "|----------------------------------------------|" << '\n';
+	}
+	
+	while (true) {
+		int tabentry;
+		cout << "Enter tab from low to high string:\n";
+		cout << g_estring << ' ';
+		cin >> tabentry;
+
+
+
+
+	}
+
+	
+}
