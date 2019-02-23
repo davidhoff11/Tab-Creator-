@@ -182,7 +182,6 @@ int main()
 			cin >> tabentry[5];
 
 			if (entries <= 0) {
-				char choice1;
 
 				cout << g_estring << tabbegin << tabentry[0] << '\n'
 					<< g_astring << tabbegin << tabentry[1] << '\n'
@@ -190,13 +189,15 @@ int main()
 					<< g_gstring << tabbegin << tabentry[3] << '\n'
 					<< bstring << tabbegin << tabentry[4] << '\n'
 					<< highestring << tabbegin << tabentry[5] << '\n'
-					<< "Does this look ok? y/n: ";
+					<< "Does this look ok? y/n:\n\n";
 					cin >> choice1;
+					cin.ignore(numeric_limits <streamsize>::max(), '\n');
+					cin.clear();
 				 /* will only execute first statement coded after this cin. will never get to the else if clause, and first if will
-				 always be executed even if user input is N or anything other than y */
+				 always be executed even if user input is N or anything other than y --- FIXED */
 												
 
-					if (choice1 = 'y') {
+					if (tolower(choice1 == 'y')) {
 						output_file.open(filename, ios::app);
 						if (output_file) {
 							output_file << g_estring << tabbegin << tabentry[0] << '\n'
@@ -207,28 +208,31 @@ int main()
 								<< highestring << tabbegin << tabentry[5] << '\n';
 							output_file.close();
 						}
+					}
 
-
-						else if (choice1 = 'n') {
+						else if (tolower(choice1 == 'n')) {
 							cin.ignore(numeric_limits <streamsize>::max(), '\n');
 							cin.clear();
 							continue;
 						}
-					}
+				
+
 			}
 
-			    else if (entries >= 1) {
+			else if (entries >= 1) {
 
-				cout << tabspace << tabentry[0] << '\n'
-					<< tabspace << tabentry[1] << '\n'
-					<< tabspace << tabentry[2] << '\n'
-					<< tabspace << tabentry[3] << '\n'
-					<< tabspace << tabentry[4] << '\n'
-					<< tabspace << tabentry[5] << '\n'
-					<< "\nDoes this look ok? y/n: ";
-					cin >> choice1;
+					cout << tabspace << tabentry[0] << '\n'
+						<< tabspace << tabentry[1] << '\n'
+						<< tabspace << tabentry[2] << '\n'
+						<< tabspace << tabentry[3] << '\n'
+						<< tabspace << tabentry[4] << '\n'
+						<< tabspace << tabentry[5] << '\n'
+						<< "\nDoes this look ok? y/n:\n\n";
+						cin >> choice1;
+						cin.ignore(numeric_limits <streamsize>::max(), '\n');
+						cin.clear();
 					
-					if (tolower(choice1 = 'y')) {
+					if (tolower(choice1 == 'y')) {
 						output_file.open(filename, ios::app);
 						if (output_file) {
 							output_file << tabspace << tabentry[0] << '\n'
@@ -237,20 +241,16 @@ int main()
 								<< tabspace << tabentry[3] << '\n'
 								<< tabspace << tabentry[4] << '\n'
 								<< tabspace << tabentry[5] << '\n';
-								output_file.close();
+							output_file.close();
 						}
-
-	
 					}
 
-					else if (tolower(choice1 = 'n')) {
+					else if (tolower(choice1 == 'n')) {
 						cin.ignore(numeric_limits <streamsize>::max(), '\n');
 						cin.clear();
 						continue;
 					}
-
-						
-				}
+			}
 					
 				
 			
