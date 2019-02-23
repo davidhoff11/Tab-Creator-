@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -20,6 +22,9 @@ int main()
 	string g_gstring;
 	string bstring;
 	string highestring;
+	string tabspace = "-";
+	string tabbegin = "|-";
+	string tabend = "-|";
 
 	while (g_or_b == 'g' || g_or_b == 'G') { // set tuning for guitar
 	
@@ -124,10 +129,15 @@ int main()
 
 
 	}
+	ofstream output_file;
+	string filename;
+	cout << "Name File to write tab to (must include .txt at the end): ";
+		cin >> filename;
+
 	
-	if (g_or_b == 'b' || g_or_b == 'B') {
-		cout << left << setw(2) << b_gstring
-			 << right << setw(50) << "|----------------------------------------------|" << '\n'
+	if (g_or_b == 'b' || g_or_b == 'B') { // set entries for bass
+		cout << left << setw(2) << b_gstring 
+			 << right << setw(50) << "|----------------------------------------------|" << '\n' 
 			 << left << setw(2) << b_dstring 
 			 << right << setw(50) << "|----------------------------------------------|" << '\n'
 			 << left << setw(2) << b_astring 
@@ -136,8 +146,8 @@ int main()
 			 << right << setw(50) << "|----------------------------------------------|" << '\n';
 	}
 
-	else if (g_or_b == 'g' || g_or_b == 'G') {
-		cout << "\n\n"
+	else if (g_or_b == 'g' || g_or_b == 'G') { //set entries for guitar
+		cout << "\n\n" 
 			 << left << setw(2) << highestring 
 			 << right << setw(50)<< "|----------------------------------------------|" << '\n'
 			 << left << setw(2) << bstring 
@@ -150,18 +160,120 @@ int main()
 			 << right << setw(50) << "|----------------------------------------------|" << '\n'
 			 << left << setw(2) << g_estring 
 			 << right << setw(50) << "|----------------------------------------------|" << '\n';
+
+		int entries = 0;
+		vector<char> tabentry(6);
+		while (true) {	
+			char choice1;
+			char choice2;
+
+			cout << "Enter tab from low to high string:\n";
+			cout <<'\n' << g_estring << ' ';
+			cin >> tabentry[0];
+			cout << '\n' << g_astring << ' ';
+			cin >> tabentry[1];
+			cout << '\n' << g_dstring << ' ';
+			cin >> tabentry[2];
+			cout << '\n' << g_gstring << ' ';
+			cin >> tabentry[3];
+			cout << '\n' << bstring << ' ';
+			cin >> tabentry[4];
+			cout << '\n' << highestring << ' ';
+			cin >> tabentry[5];
+
+			if (entries <= 0) {
+				char choice1;
+
+				cout << g_estring << tabbegin << tabentry[0] << '\n'
+					<< g_astring << tabbegin << tabentry[1] << '\n'
+					<< g_dstring << tabbegin << tabentry[2] << '\n'
+					<< g_gstring << tabbegin << tabentry[3] << '\n'
+					<< bstring << tabbegin << tabentry[4] << '\n'
+					<< highestring << tabbegin << tabentry[5] << '\n'
+					<< "Does this look ok? y/n: ";
+					cin >> choice1;
+				 /* will only execute first statement coded after this cin. will never get to the else if clause, and first if will
+				 always be executed even if user input is N or anything other than y */
+												
+
+					if (choice1 = 'y') {
+						output_file.open(filename, ios::app);
+						if (output_file) {
+							output_file << g_estring << tabbegin << tabentry[0] << '\n'
+								<< g_astring << tabbegin << tabentry[1] << '\n'
+								<< g_dstring << tabbegin << tabentry[2] << '\n'
+								<< g_gstring << tabbegin << tabentry[3] << '\n'
+								<< bstring << tabbegin << tabentry[4] << '\n'
+								<< highestring << tabbegin << tabentry[5] << '\n';
+							output_file.close();
+						}
+
+
+						else if (choice1 = 'n') {
+							cin.ignore(numeric_limits <streamsize>::max(), '\n');
+							cin.clear();
+							continue;
+						}
+					}
+			}
+
+			    else if (entries >= 1) {
+
+				cout << tabspace << tabentry[0] << '\n'
+					<< tabspace << tabentry[1] << '\n'
+					<< tabspace << tabentry[2] << '\n'
+					<< tabspace << tabentry[3] << '\n'
+					<< tabspace << tabentry[4] << '\n'
+					<< tabspace << tabentry[5] << '\n'
+					<< "\nDoes this look ok? y/n: ";
+					cin >> choice1;
+					
+					if (tolower(choice1 = 'y')) {
+						output_file.open(filename, ios::app);
+						if (output_file) {
+							output_file << tabspace << tabentry[0] << '\n'
+								<< tabspace << tabentry[1] << '\n'
+								<< tabspace << tabentry[2] << '\n'
+								<< tabspace << tabentry[3] << '\n'
+								<< tabspace << tabentry[4] << '\n'
+								<< tabspace << tabentry[5] << '\n';
+								output_file.close();
+						}
+
+	
+					}
+
+					else if (tolower(choice1 = 'n')) {
+						cin.ignore(numeric_limits <streamsize>::max(), '\n');
+						cin.clear();
+						continue;
+					}
+
+						
+				}
+					
+				
+			
+			
+				entries++;
+				
+		        cout << "Continue? y/n: ";
+				cin >> choice2;
+
+				if (choice2 == 'y') {
+					continue;
+				}
+				else if (choice2 == 'n') {
+					// enter code that writes tabend to the end each column once other sequences are fixed
+					break;
+				}
+			
+
+		}
+
 	}
 	
-	while (true) {
-		int tabentry;
-		cout << "Enter tab from low to high string:\n";
-		cout << g_estring << ' ';
-		cin >> tabentry;
-
-
-
-
-	}
+	cout << "\nThanks for using Tab Creator!\n";
 
 	
 }
